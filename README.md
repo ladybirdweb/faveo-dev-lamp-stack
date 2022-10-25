@@ -23,4 +23,11 @@ sudo -s
 ```
 * Now execute the script and follow the Instructions you will be asked to input the Nodejs version, PHP Version, Database Root user password, and the Domain name of your choice. Consult your respective Team Leaders for the version numbers of Nodejs and PHP. Refer to the below image as an example.
 
-<img src="/images/prompt.png" alt="Prompt"/>
+<img src="/contents/prompt.png" alt="Prompt"/>
+
+Note: On Ubuntu 22.04 you might come across "Daemons using outdated libraries" Prompts several times during the installation. Leave the deault values and simply press [TAB] key and [Spacebar].
+
+<img src="/contents/needrestartprompt1.png" alt="Prompt"/>
+<img src="/contents/needrestartprompt2.png" alt="Prompt"/>
+
+When the installation is completed you will be disaplyed with your login URL, phpMyAdmin URL, Web Server root directory, and Database username and password. This details will also be saved in a file named "credentials.txt" under /var/www directory. 
