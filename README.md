@@ -10,6 +10,7 @@ Note: This script must be run only on freshly installed Ubuntu 20.04 or 22.04 an
 * click on the below link and download the file "lamp.sh".
 
 * [Installation Script](/contents/lamp.sh)
+<a href="lamp.sh" download>Click to Download</a>
 
 * Once Downloaded navigate to the folder where the script has downloaded and execute the below command to provide executable permission to the lamp.sh script
 
