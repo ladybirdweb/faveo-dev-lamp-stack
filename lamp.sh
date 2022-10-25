@@ -94,7 +94,20 @@ apt-get purge php8.1* php7.3* php7.4* mariadb* nodejs* composer* apache2* -y
 
 echo "$skyblue Updating Repository cache and Installing prerequisites.....$reset"
 
-apt-get update; apt-get install software-properties-common unzip curl zip wget  nano -y ; apt-get upgrade -y
+apt-get update; apt-get install software-properties-common unzip curl zip wget  nano snapd -y ; apt-get upgrade -y
+
+systemctl enable snapd
+
+systemctl start snapd
+
+snap install phpstorm --classic
+
+if [[ $? != 0 ]]; then
+echo -e "\n";
+echo -e "$red Prerequisite Installation failed check your Internet connection or contact Server Team. $reset"
+echo -e "\n";
+exit 1;
+fi 
 
 # Adding Required Repositories.
 
@@ -216,6 +229,28 @@ echo -e "\n";
 exit 1;
 fi 
 
+# Installing HTML to PDF Plugin
+
+echo -e "$green Installing HTML to PDF Plugin. $reset"
+
+echo "deb http://security.ubuntu.com/ubuntu focal-security main" | sudo tee /etc/apt/sources.list.d/focal-security.list
+apt-get update; apt install libssl1.1 -y
+
+wget https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.focal_amd64.deb -P /var/www/
+
+dpkg -i /var/www/wkhtmltox_0.12.6-1.focal_amd64.deb
+
+apt --fix-broken install -y
+
+rm -f /var/www/wkhtmltox_0.12.6-1.focal_amd64.deb
+
+if [[ $? != 0 ]]; then
+echo -e "\n";
+echo -e "$red HTML to PDF Plugin Installation Failed contact Server Team. $reset"
+echo -e "\n";
+fi 
+
+
 echo -e "$skyblue Installing latest version of composer... $reset"
 php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
 php -r "if (hash_file('sha384', 'composer-setup.php') === '55ce33d7678c5a611085589f1f3ddf8b3c52d662cd01d4ba75c0ee0459970c2200a51f492d557530c71c15d8dba01eae') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
@@ -335,6 +370,33 @@ cat <<EOF  >/etc/apache2/sites-available/faveo-ssl.conf
 </IfModule>
 EOF
 
+sed -i 's/file_uploads =.*/file_uploads = On/g' /etc/php/$php_version/apache2/php.ini
+sed -i 's/allow_url_fopen =.*/allow_url_fopen = On/g' /etc/php/$php_version/apache2/php.ini
+sed -i 's/short_open_tag =.*/short_open_tag = On/g' /etc/php/$php_version/apache2/php.ini
+sed -i 's/memory_limit =.*/memory_limit = 256MB/g' /etc/php/$php_version/apache2/php.ini
+sed -i 's/;cgi.fix_pathinfo=.*/cgi.fix_pathinfo = 0/g' /etc/php/$php_version/apache2/php.ini
+sed -i 's/upload_max_filesize =.*/upload_max_filesize = 100M/g' /etc/php/$php_version/apache2/php.ini
+sed -i 's/post_max_size =.*/post_max_size = 100M/g' /etc/php/$php_version/apache2/php.ini
+sed -i 's/max_execution_time =.*/max_execution_time = 360/g' /etc/php/$php_version/apache2/php.ini
+
+sed -i 's/file_uploads =.*/file_uploads = On/g' /etc/php/$php_version/fpm/php.ini
+sed -i 's/allow_url_fopen =.*/allow_url_fopen = On/g' /etc/php/$php_version/fpm/php.ini
+sed -i 's/short_open_tag =.*/short_open_tag = On/g' /etc/php/$php_version/fpm/php.ini
+sed -i 's/memory_limit =.*/memory_limit = 256MB/g' /etc/php/$php_version/fpm/php.ini
+sed -i 's/;cgi.fix_pathinfo=.*/cgi.fix_pathinfo = 0/g' /etc/php/$php_version/fpm/php.ini
+sed -i 's/upload_max_filesize =.*/upload_max_filesize = 100M/g' /etc/php/$php_version/fpm/php.ini
+sed -i 's/post_max_size =.*/post_max_size = 100M/g' /etc/php/$php_version/fpm/php.ini
+sed -i 's/max_execution_time =.*/max_execution_time = 360/g' /etc/php/$php_version/fpm/php.ini
+
+sed -i 's/file_uploads =.*/file_uploads = On/g' /etc/php/$php_version/cli/php.ini
+sed -i 's/allow_url_fopen =.*/allow_url_fopen = On/g' /etc/php/$php_version/cli/php.ini
+sed -i 's/short_open_tag =.*/short_open_tag = On/g' /etc/php/$php_version/cli/php.ini
+sed -i 's/memory_limit =.*/memory_limit = 256MB/g' /etc/php/$php_version/cli/php.ini
+sed -i 's/;cgi.fix_pathinfo=.*/cgi.fix_pathinfo = 0/g' /etc/php/$php_version/cli/php.ini
+sed -i 's/upload_max_filesize =.*/upload_max_filesize = 100M/g' /etc/php/$php_version/cli/php.ini
+sed -i 's/post_max_size =.*/post_max_size = 100M/g' /etc/php/$php_version/cli/php.ini
+sed -i 's/max_execution_time =.*/max_execution_time = 360/g' /etc/php/$php_version/cli/php.ini
+
 a2enmod rewrite
 
 a2enmod ssl
@@ -353,34 +415,27 @@ systemctl restart php$php_version-fpm
 
 systemctl restart apache2
 
+echo "Your URL: https://$domain_name" >> /var/www/credentials.txt
+echo "phpMyAdmin URL: https://$domain_name/phpmyadmin" >> /var/www/credentials.txt
+echo "Database Username: root" >> /var/www/credentials.txt
+echo "Database Password: $db_root_pw" >> /var/www/credentials.txt
+
+
 if [[ $? -eq 0 ]]; then
     echo -e "\n"
-    echo "#########################################################################"
+    echo "$yellow ######################################################################### $reset"
     echo -e "\n"
-    echo "Faveo Development Environment installed successfully. Visit https://$domain_name from your browser."
-    echo "Please save the following credentials."
-    echo "phpMyAdmin URL: https://$domain_name/phpmyadmin"
-    echo "MariaDB Database root password: root"
-    echo "MariaDB Database root password: $db_root_pw"
+    echo "$green You will find the below details saved in a file name $reset $skyblue crdentials.txt under /var/www/credentials.txt $reset"
+    echo "$green Use the same Database Credentials to login to phpMyAdmin  $reset"
+    echo "$green Faveo Development Environment installed successfully. Visit $reset $skyblue https://$domain_name from your browser. $reset"
+    echo "$green Please save the following credentials. $reset"
+    echo "$green phpMyAdmin URL: $reset $skyblue https://$domain_name/phpmyadmin $reset"
+    echo "$green MariaDB Database Username:$reset $skyblue root $reset"
+    echo "$green MariaDB Database root password: $reset $skyblue $db_root_pw $reset"
+    echo "$green Web server Root Directory path: $reset $skyblue /var/www/html $reset"
     echo -e "\n"
     echo "#########################################################################"
 else
     echo "Script Failed unknown error."
     exit 1;
 fi
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
