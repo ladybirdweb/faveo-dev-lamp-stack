@@ -9,8 +9,7 @@ Note: This script must be run only on freshly installed Ubuntu 20.04 or 22.04 an
 
 * click on the below link and download the file "lamp.sh".
 
-* [Installation Script](https://github.com/ladybirdweb/faveo-dev-lamp-stack/blob/main/contents/lamp.sh)
-<a href="https://github.com/ladybirdweb/faveo-dev-lamp-stack/blob/main/contents/lamp.sh" download>Click to Download</a>
+* [Installation Script](/lamp.sh)
 
 * Once Downloaded navigate to the folder where the script has downloaded and execute the below command to provide executable permission to the lamp.sh script
 
@@ -21,7 +20,11 @@ chmod +x lamp.sh
 ```sh
 sudo -s
 ```
-* Now execute the script and follow the Instructions you will be asked to input the Nodejs version, PHP Version, Database Root user password, and the Domain name of your choice. Consult your respective Team Leaders for the version numbers of Nodejs and PHP. Refer to the below image as an example.
+* Now execute the script by running the below command and follow the Instructions you will be asked to input the Nodejs version, PHP Version, Database Root user password, and the Domain name of your choice. Consult your respective Team Leaders for the version numbers of Nodejs and PHP. Refer to the below image as an example.
+
+```sh
+./lamp.sh
+```
 
 <img src="/contents/prompt.png" alt="Prompt"/>
 
