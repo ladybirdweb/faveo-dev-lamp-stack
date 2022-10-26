@@ -406,11 +406,11 @@ cat <<EOF > /var/www/html/index.html
 <br>
 <div class="col-sm-6">
 <br>
-    <h4>Your Domain Name :</h4><br>
-    <h4> Your PHPMyAdmin URL :</h4><br>
-    <h4>  Your Database Username:</h4><br>
-    <h4>Database Root Password: </h4><br>
-    <h4>Web Server Root Directory: </h4><br>
+    <h4>Your Domain Name : https://$domain_name</h4><br>
+    <h4> Your PHPMyAdmin URL : https://$domain_name/phpmyadmin</h4><br>
+    <h4>  Your Database Username: root</h4><br>
+    <h4>Database Root Password: $db_root_pw</h4><br>
+    <h4>Web Server Root Directory: /var/www/html</h4><br>
     <h5 class="cod"><i> &nbsp&nbsp
         &nbsp&nbsp &nbsp&nbsp   Contact your Team Leader for further Assistant. Happy Coding!!</i></h5>
 
