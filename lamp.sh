@@ -344,8 +344,8 @@ cat <<EOF  >/etc/apache2/sites-available/faveo-ssl.conf
         AllowOverride All
         Require all granted
     </Directory>
-    ErrorLog ${APACHE_LOG_DIR}/faveo-error.log
-    CustomLog ${APACHE_LOG_DIR}/faveo-access.log combined
+    ErrorLog /var/log/apache2/faveo-error.log
+    CustomLog /var/log/apache2/faveo-access.log combined
     RewriteEngine on
     RewriteCond %{SERVER_NAME} =$domain_name
     RewriteRule ^ https://%{SERVER_NAME}%{REQUEST_URI} [END,NE,R=permanent]
@@ -360,8 +360,8 @@ cat <<EOF  >/etc/apache2/sites-available/faveo-ssl.conf
         AllowOverride All
         Require all granted
     </Directory>
-    ErrorLog ${APACHE_LOG_DIR}/faveo-error.log
-    CustomLog ${APACHE_LOG_DIR}/faveo-access.log combined
+    ErrorLog /var/log/apache2/faveo-error.log
+    CustomLog /var/log/apache2/faveo-access.log combined
     SSLEngine on
     SSLCertificateFile /etc/apache2/ssl/faveolocal.crt
     SSLCertificateKeyFile /etc/apache2/ssl/private.key
