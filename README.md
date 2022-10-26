@@ -7,23 +7,26 @@ ___
 
 Note: This script must be run only on freshly installed Ubuntu 20.04 or 22.04 and it should be run as root user or with sudo privilege.
 
-* click on the below link and download the file "lamp.sh".
 
-* [Installation Script](/lamp.sh)
+* Now clone the Faveo Development LAMP Stack repositiory.
+
+```sh
+git clone https://github.com/ladybirdweb/faveo-dev-lamp-stack.git
+```
+* Nivgate inside the cloned directory.
+```sh
+cd faveo-dev-lamp-stack/
+```
 
 * Once Downloaded navigate to the folder where the script has downloaded and execute the below command to provide executable permission to the lamp.sh script
 
 ```sh
-chmod +x lamp.sh
-```
-* Next switch to root user by executing the below command and enter the password when prompted.
-```sh
-sudo -s
+sudo chmod +x lamp.sh
 ```
 * Now execute the script by running the below command and follow the Instructions you will be asked to input the Nodejs version, PHP Version, Database Root user password, and the Domain name of your choice. Consult your respective Team Leaders for the version numbers of Nodejs and PHP. Refer to the below image as an example.
 
 ```sh
-./lamp.sh
+sudo bash lamp.sh
 ```
 
 <img src="/contents/prompt.png" alt="Prompt"/>
