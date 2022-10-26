@@ -412,6 +412,8 @@ cat <<EOF > /var/www/html/index.html
     <h4>Database Root Password: $db_root_pw</h4><br>
     <h4>Web Server Root Directory: /var/www/html</h4><br>
     <h5 class="cod"><i> &nbsp&nbsp
+        &nbsp&nbsp &nbsp&nbsp   Contact DevOps Team to configure license for PhpStorm IDE.</i></h5>
+    <h5 class="cod"><i> &nbsp&nbsp
         &nbsp&nbsp &nbsp&nbsp   Contact your Team Leader for further Assistant. Happy Coding!!</i></h5>
 
 </div>
