@@ -297,13 +297,13 @@ fi;
 
 echo -e "$green Configuring phpMyAdmin .....  $reset"
 
-wget https://files.phpmyadmin.net/phpMyAdmin/5.1.1/phpMyAdmin-5.1.1-all-languages.zip -P /usr/share/
+wget https://files.phpmyadmin.net/phpMyAdmin/5.2.0/phpMyAdmin-5.2.0-all-languages.zip -P /usr/share/
 
-unzip /usr/share/phpMyAdmin-5.1.1-all-languages.zip -d /usr/share
+unzip /usr/share/phpMyAdmin-5.2.0-all-languages.zip -d /usr/share
 
-mv /usr/share/phpMyAdmin-5.1.1-all-languages /usr/share/phpmyadmin
+mv /usr/share/phpMyAdmin-5.2.0-all-languages /usr/share/phpmyadmin
 
-rm -f /usr/share/phpMyAdmin-5.1.1-all-languages.zip
+rm -f /usr/share/phpMyAdmin-5.2.0-all-languages.zip
 
 mkdir /usr/share/phpmyadmin/tmp
 
