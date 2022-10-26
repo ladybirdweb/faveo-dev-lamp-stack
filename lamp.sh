@@ -333,7 +333,93 @@ Alias /phpMyAdmin /usr/share/phpmyadmin
 </Directory>
 EOF
 
-echo -e '<h1> This is the Test Page of your Faveo Development Environment </h1>' > /var/www/html/index.html
+cat <<EOF > /var/www/html/index.html
+<!doctype html>
+<html lang="eng">
+<head>
+    <title>Faveo welcome page</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" >
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <style>
+        h3{
+            text-align: center;
+            margin-top: 0%;
+
+            font-size: 55px;
+            color:steelblue;
+            text-shadow: 3px 3px lightblue;
+            font-family:  Serif;
+        }
+        p{
+            margin-left: 350px;
+            color:lightblue;
+        }
+        img {
+            margin-top: 0%;
+            width: 100px;
+            height: 50px;
+            margin-right: 100%;
+
+        }
+        h4{
+            margin-bottom: 10px;
+            font-size: 20px;
+            color:green;
+            text-shadow: 2px 2px lightblue;
+            margin-right: 300px;
+
+            font-family: Serif;
+            }
+
+        .cod{
+            text-align: center;
+            margin-top:10%;
+
+            font-size: 19px;
+            color:black;
+
+            font-family:  Serif;
+
+        }
+
+
+    </style>
+
+
+</head>
+
+
+<body >
+<div class="container content ">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Faveo_Logo.png" class="img-thumbnail float-right img"  alt="faveo img" >
+    <h3> Welcome to Faveo Helpdesk Development Environment </h3>
+    <div class="row">
+        <div class="col-sm-6 ">
+            <img src="https://assets.hongkiat.com/uploads/mean-vs-lamp-stacks/01-lamp-stack-tech-clouds.jpg?v2"  class="rounded-circle float-right pic" alt="lamp" style="margin-right:20px; margin-top:0px; width:500px;height:500px;">
+        </div>
+<br>
+<div class="col-sm-6">
+<br>
+    <h4>Your Domain Name :</h4><br>
+    <h4> Your PHPMyAdmin URL :</h4><br>
+    <h4>  Your Database Username:</h4><br>
+    <h4>Database Root Password: </h4><br>
+    <h4>Web Server Root Directory: </h4><br>
+    <h5 class="cod"><i> &nbsp&nbsp
+        &nbsp&nbsp &nbsp&nbsp   Contact your Team Leader for further Assistant. Happy Coding!!</i></h5>
+
+</div>
+</div>
+</div>
+</body>
+</html>
+EOF
 
 cat <<EOF  >/etc/apache2/sites-available/faveo-ssl.conf
 <VirtualHost *:80>
