@@ -373,7 +373,7 @@ EOF
 sed -i 's/file_uploads =.*/file_uploads = On/g' /etc/php/$php_version/apache2/php.ini
 sed -i 's/allow_url_fopen =.*/allow_url_fopen = On/g' /etc/php/$php_version/apache2/php.ini
 sed -i 's/short_open_tag =.*/short_open_tag = On/g' /etc/php/$php_version/apache2/php.ini
-sed -i 's/memory_limit =.*/memory_limit = 256MB/g' /etc/php/$php_version/apache2/php.ini
+sed -i 's/memory_limit =.*/memory_limit = 1024MB/g' /etc/php/$php_version/apache2/php.ini
 sed -i 's/;cgi.fix_pathinfo=.*/cgi.fix_pathinfo = 0/g' /etc/php/$php_version/apache2/php.ini
 sed -i 's/upload_max_filesize =.*/upload_max_filesize = 100M/g' /etc/php/$php_version/apache2/php.ini
 sed -i 's/post_max_size =.*/post_max_size = 100M/g' /etc/php/$php_version/apache2/php.ini
@@ -382,7 +382,7 @@ sed -i 's/max_execution_time =.*/max_execution_time = 360/g' /etc/php/$php_versi
 sed -i 's/file_uploads =.*/file_uploads = On/g' /etc/php/$php_version/fpm/php.ini
 sed -i 's/allow_url_fopen =.*/allow_url_fopen = On/g' /etc/php/$php_version/fpm/php.ini
 sed -i 's/short_open_tag =.*/short_open_tag = On/g' /etc/php/$php_version/fpm/php.ini
-sed -i 's/memory_limit =.*/memory_limit = 256MB/g' /etc/php/$php_version/fpm/php.ini
+sed -i 's/memory_limit =.*/memory_limit = 1024MB/g' /etc/php/$php_version/fpm/php.ini
 sed -i 's/;cgi.fix_pathinfo=.*/cgi.fix_pathinfo = 0/g' /etc/php/$php_version/fpm/php.ini
 sed -i 's/upload_max_filesize =.*/upload_max_filesize = 100M/g' /etc/php/$php_version/fpm/php.ini
 sed -i 's/post_max_size =.*/post_max_size = 100M/g' /etc/php/$php_version/fpm/php.ini
@@ -391,7 +391,7 @@ sed -i 's/max_execution_time =.*/max_execution_time = 360/g' /etc/php/$php_versi
 sed -i 's/file_uploads =.*/file_uploads = On/g' /etc/php/$php_version/cli/php.ini
 sed -i 's/allow_url_fopen =.*/allow_url_fopen = On/g' /etc/php/$php_version/cli/php.ini
 sed -i 's/short_open_tag =.*/short_open_tag = On/g' /etc/php/$php_version/cli/php.ini
-sed -i 's/memory_limit =.*/memory_limit = 256MB/g' /etc/php/$php_version/cli/php.ini
+sed -i 's/memory_limit =.*/memory_limit = 1024MB/g' /etc/php/$php_version/cli/php.ini
 sed -i 's/;cgi.fix_pathinfo=.*/cgi.fix_pathinfo = 0/g' /etc/php/$php_version/cli/php.ini
 sed -i 's/upload_max_filesize =.*/upload_max_filesize = 100M/g' /etc/php/$php_version/cli/php.ini
 sed -i 's/post_max_size =.*/post_max_size = 100M/g' /etc/php/$php_version/cli/php.ini
