@@ -37,3 +37,5 @@ Note: On Ubuntu 22.04 you might come across "Daemons using outdated libraries" P
 <img src="/contents/needrestartprompt2.png" alt="Prompt"/>
 
 When the installation is completed you will be disaplyed with your login URL, phpMyAdmin URL, Web Server root directory, and Database username and password. This details will also be saved in a file named "credentials.txt" under /var/www directory. 
+
+<img src="/contents/credentials.png" alt="credentials"/>
