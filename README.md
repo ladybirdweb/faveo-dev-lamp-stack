@@ -3,28 +3,27 @@
 Set up the development environment for Faveo Helpdesk with a simplified bash script installer.
 
 ## Usage
-___
 
 Note: This script must be run only on freshly installed Ubuntu 20.04 or 22.04 and it should be run as a root user or with sudo privilege.
 
 
-* Now clone the Faveo Development LAMP Stack repository.
+Now clone the Faveo Development LAMP Stack repository.
 
 ```sh
 git clone https://github.com/ladybirdweb/faveo-dev-lamp-stack.git
 ```
-* Navigate inside the cloned directory.
+Navigate inside the cloned directory.
 ```sh
 cd faveo-dev-lamp-stack/
 ```
 
-* Once downloaded, navigate to the folder where the script has been downloaded and execute the below command to provide executable permission to the lamp.sh script
+Once downloaded, navigate to the folder where the script has been downloaded and execute the below command to provide executable permission to the lamp.sh script
 
 ```sh
 sudo chmod +x lamp.sh
 ```
 
-* Now, execute the script by running the below command, and following the instructions, you will be asked to input the Nodejs version, PHP Version, Database Root user password, and the Domain name of your choice. Consult your respective Team Leaders for the version numbers of Nodejs and PHP. Refer to the below image as an example.
+Now, execute the script by running the below command, and following the instructions, you will be asked to input the Nodejs version, PHP Version, Database Root user password, and the Domain name of your choice. Consult your respective Team Leaders for the version numbers of Nodejs and PHP. Refer to the below image as an example.
 
 
 ```sh
