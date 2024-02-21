@@ -90,7 +90,7 @@ fi
 
 echo "$skyblue Uninstalling existing or Older versions.....$reset"
 
-apt-get purge php8.1* php7.3* php7.4* mariadb* nodejs* composer* apache2* -y
+apt-get purge php8.3* php8.2* php8.1* php7.3* php7.4* mariadb* nodejs* composer* apache2* -y
 
 echo "$skyblue Updating Repository cache and Installing prerequisites.....$reset"
 
@@ -138,10 +138,10 @@ fi
 rm -f mariadb_repo_setup
 
 echo -e "\n";
-read -p "$skyblue Enter the prefered version for Nodejs (Ex: 12.x,13.x,14.x etc..): $reset" nodejs_version
+read -p "$skyblue Enter the prefered version for Nodejs (Ex: 19.x,20.x,21.x etc..): $reset" nodejs_version
 echo -e "\n";
 echo -e "\n";
-read -p "$skyblue Enter the prefered version for PHP (Ex: 7.3,8.1): $reset" php_version
+read -p "$skyblue Enter the prefered version for PHP (Ex: 8.1,8.2): $reset" php_version
 echo -e "\n";
 echo -e "\n";
 read -p "$skyblue Enter Password for Database ROOT User: $reset" db_root_pw
@@ -200,7 +200,7 @@ mysql -e "alter user root@localhost identified by '$db_root_pw'"
 
 # Installing prefered version of PHP
 
-if [[ $php_version == 7.3 ]]; then
+if [[ $php_version == 8.1 ]]; then
 echo -e "\n";
 echo -e "$green Installing PHP-$php_version. $reset"
 apt install -y php$php_version libapache2-mod-php$php_version php$php_version-mysql \
@@ -209,7 +209,7 @@ apt install -y php$php_version libapache2-mod-php$php_version php$php_version-my
     php$php_version-bcmath php$php_version-intl php$php_version-xml php$php_version-curl  \
     php$php_version-imap php$php_version-ldap php$php_version-gmp php$php_version-redis
 echo -e "\n";
-elif [[ $php_version == 8.1 ]]; then
+elif [[ $php_version == 8.2 ]]; then
 echo -e "\n";
 echo -e "$green Installing PHP-$php_version. $reset"
 apt install -y php$php_version libapache2-mod-php$php_version php$php_version-mysql \
@@ -466,7 +466,6 @@ sed -i 's/;cgi.fix_pathinfo=.*/cgi.fix_pathinfo = 0/g' /etc/php/$php_version/apa
 sed -i 's/upload_max_filesize =.*/upload_max_filesize = 100M/g' /etc/php/$php_version/apache2/php.ini
 sed -i 's/post_max_size =.*/post_max_size = 100M/g' /etc/php/$php_version/apache2/php.ini
 sed -i 's/max_execution_time =.*/max_execution_time = 360/g' /etc/php/$php_version/apache2/php.ini
-
 sed -i 's/file_uploads =.*/file_uploads = On/g' /etc/php/$php_version/fpm/php.ini
 sed -i 's/allow_url_fopen =.*/allow_url_fopen = On/g' /etc/php/$php_version/fpm/php.ini
 sed -i 's/short_open_tag =.*/short_open_tag = On/g' /etc/php/$php_version/fpm/php.ini
@@ -475,7 +474,6 @@ sed -i 's/;cgi.fix_pathinfo=.*/cgi.fix_pathinfo = 0/g' /etc/php/$php_version/fpm
 sed -i 's/upload_max_filesize =.*/upload_max_filesize = 100M/g' /etc/php/$php_version/fpm/php.ini
 sed -i 's/post_max_size =.*/post_max_size = 100M/g' /etc/php/$php_version/fpm/php.ini
 sed -i 's/max_execution_time =.*/max_execution_time = 360/g' /etc/php/$php_version/fpm/php.ini
-
 sed -i 's/file_uploads =.*/file_uploads = On/g' /etc/php/$php_version/cli/php.ini
 sed -i 's/allow_url_fopen =.*/allow_url_fopen = On/g' /etc/php/$php_version/cli/php.ini
 sed -i 's/short_open_tag =.*/short_open_tag = On/g' /etc/php/$php_version/cli/php.ini
