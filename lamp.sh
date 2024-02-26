@@ -90,7 +90,7 @@ fi
 
 echo "$skyblue Uninstalling existing or Older versions.....$reset"
 
-apt-get purge php8.3* php8.2* php8.1* php7.3* php7.4* mariadb* nodejs* composer* apache2* -y
+apt-get purge php8.3* php8.2* php8.1* php7.3* php7.4* mariadb* nodejs* composer* apache2* redis-server supervisor -y
 
 echo "$skyblue Updating Repository cache and Installing prerequisites.....$reset"
 
@@ -220,8 +220,6 @@ apt install -y php$php_version libapache2-mod-php$php_version php$php_version-my
 echo -e "\n";
 fi
 
-
-
 if [[ $? != 0 ]]; then
 echo -e "\n";
 echo -e "$red PHP-$php_version Installation Failed contact Server Team. $reset"
@@ -250,6 +248,7 @@ echo -e "$red HTML to PDF Plugin Installation Failed contact Server Team. $reset
 echo -e "\n";
 fi 
 
+# Installing Composer latest version
 
 echo -e "$skyblue Installing latest version of composer... $reset"
 php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
@@ -271,6 +270,8 @@ exit 1;
 fi
 php -r "unlink('composer-setup.php');"
 mv composer.phar /usr/bin/composer
+
+# Generating SSL certificaes
 
 echo -e "$green Generating Certificates for $domain_name .....  $reset"
 mkdir -p /etc/apache2/ssl
@@ -294,6 +295,38 @@ else
     echo -e "$red Certification generation failed. $reset"
     exit 1;
 fi;
+
+# Installing Supervisor
+
+apt-get install redis-server -y
+systemctl start redis-server
+systemctl enable redis-server
+apt-get install supervisor -y
+systemctl enable supervisor
+systemctl start supervisor
+touch /etc/supervisor/conf.d/faveo-worker.conf
+touch /home/supervisor-example-conf-file
+cat <<EOF > /home/supervisor-example-conf-file
+[program:faveo-Horizon]
+process_name=%(program_name)s
+command=php /var/www/faveo/artisan horizon
+autostart=true
+autorestart=true
+user=www-data
+redirect_stderr=true
+stdout_logfile=/var/www/faveo/storage/logs/horizon-worker.log
+
+[program:faveo-websockets]
+process_name=%(program_name)s
+command=php /var/www/faveo/artisan websockets:serve
+autostart=true
+autorestart=true
+user=root
+redirect_stderr=true
+stdout_logfile=/var/www/faveo/storage/logs/websocket-worker.log
+EOF
+
+# Installing PHPMYADMIN 
 
 echo -e "$green Configuring phpMyAdmin .....  $reset"
 
@@ -332,6 +365,8 @@ Alias /phpMyAdmin /usr/share/phpmyadmin
    </IfModule>
 </Directory>
 EOF
+
+# Creating Index file for LAMP setup
 
 cat <<EOF > /var/www/html/index.html
 <!doctype html>
@@ -411,6 +446,9 @@ cat <<EOF > /var/www/html/index.html
     <h4>  Your Database Username: root</h4><br>
     <h4>Database Root Password: $db_root_pw</h4><br>
     <h4>Web Server Root Directory: /var/www/html</h4><br>
+    <h4>Supervisor configuration file: /etc/supervisor/conf.d/faveo-worker.conf</h4><br>
+    <h4>Supervisor configuration example file: /home/supervisor-example-conf-file</h4><br>
+    <h4>Please copy and change the supervisor configuration example file with your actual Faveo root directory to the supervisor configuration file</h4><br>
     <h5 class="cod"><i> &nbsp&nbsp
         &nbsp&nbsp &nbsp&nbsp   Contact DevOps Team to configure license for PhpStorm IDE.</i></h5>
     <h5 class="cod"><i> &nbsp&nbsp
